@@ -4,6 +4,12 @@ if(process.env.NODE_ENV != "production"){
 
 const express = require("express");
 const app = express();
+
+ app.get("/",(req,res)=>{
+   res.redirect("/listings");
+ })
+
+ 
 const mongoose = require("mongoose");
 const path = require("path");
 const methodOverride = require("method-override");
@@ -70,10 +76,6 @@ passport.use(new LocalStrategy(User.authenticate()));
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
- app.get("/",(req,res)=>{
-   res.redirect("/listings");
- })
 
 app.use((req,res,next)=>{
     res.locals.success = req.flash("success");
