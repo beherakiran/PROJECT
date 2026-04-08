@@ -71,9 +71,9 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// app.get("/",(req,res)=>{
-//     res.send("HII I'm root");
-// })
+ app.get("/",(req,res)=>{
+   res.redirect("/listings");
+ })
 const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
@@ -113,9 +113,9 @@ app.use((err,req,res,next)=>{
     
 })
 
-app.listen(8080,()=>{
-    console.log("server is listening on port 8080");
-})
+// app.listen(8080,()=>{
+//     console.log("server is listening on port 8080");
+// })
 
 
 
