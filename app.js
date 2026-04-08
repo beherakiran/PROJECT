@@ -71,9 +71,14 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.get("/",(req,res)=>{
-    res.send("HII I'm root");
-})
+// app.get("/",(req,res)=>{
+//     res.send("HII I'm root");
+// })
+const PORT = process.env.PORT || 8080;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 
 app.use((req,res,next)=>{
     res.locals.success = req.flash("success");
