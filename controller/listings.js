@@ -30,17 +30,17 @@ module.exports.showListing = (async(req,res)=>{
 });
 
 module.exports.createListing = async(req,res,next)=>{
-    const geoData = await maptilerClient.geocoding.forward(
-    req.body.listing.location,
-    { limit: 1 }
-  ).send();
+//     const geoData = await maptilerClient.geocoding.forward(
+//     req.body.listing.location,
+//     { limit: 1 }
+//   );
     let url = req.file.path;
     let filename = req.file.filename;
     const newListing = new Listing(req.body.listing);
     newListing.owner = req.user._id;
     newListing.image = {url,filename};
 
-  newListing.geometry =  geoData.features[0].geometry;
+//   newListing.geometry =  geoData.features[0].geometry;
 
     let savedListing =  await newListing.save();
     console.log(savedListing);
