@@ -1,8 +1,12 @@
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config({quiet:true});
+}
+
+
 const mongoose = require("mongoose");
 const initData = require("./data");
 const Listing = require("../models/listing");
 const { init } = require("../models/user");
-require("dotenv").config();
 
 main().then(()=>{
     console.log("Connected!")

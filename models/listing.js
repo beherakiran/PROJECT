@@ -50,7 +50,7 @@ listingSchema.post("findOneAndDelete",async(listing)=>{
     }
 });
 
-listingSchema.index({ geometry: "2dsphere" });
+// listingSchema.index({ geometry: "2dsphere" });
 
 const Listing = mongoose.model("Listing",listingSchema);
 
