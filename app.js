@@ -9,7 +9,7 @@ const app = express();
    res.redirect("/listings");
  })
 
- 
+const Listing = require("./models/listing");
 const mongoose = require("mongoose");
 const path = require("path");
 const methodOverride = require("method-override");
@@ -35,16 +35,19 @@ app.use(methodOverride("_method"));
 app.engine("ejs",ejsMate);
 app.use(express.static(path.join(__dirname,"/public")));
 
+const dbUrl = process.env.ATLASDB_URL || "mongodb://127.0.0.1:27017/wanderlust"; ;
+
 main().then(()=>{
     console.log("Connected!")
 }).catch((err)=>{console.log(err)});
 
+
 async function main(){
-    await mongoose.connect(process.env.ATLASDB_URL);
+    await mongoose.connect(dbUrl);
 }
 
 const store = MongoStore.create({
-    mongoUrl : process.env.ATLASDB_URL,
+    mongoUrl : dbUrl,
     crypto:{
         secret:process.env.SECRET
     },
@@ -122,3 +125,4 @@ app.listen(PORT, () => {
 
 
 
+console.log(Listing.collection.name);

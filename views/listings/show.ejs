@@ -7,7 +7,7 @@
 <div class="card col-6 offset-3 show-card listing-card">
   <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="img">
   <div class="card-body">
-    <p class="card-text">Owned by<i><b><%= listing.owner?.username || 'Unknown'%></b></i></p>
+    <p class="card-text">Owned by<i><b><%= listing.owner.username%></b></i></p>
     <p><%= listing.description %> </p>  
     <p> &#8377;<%=listing.price.toLocaleString("en-IN")%>/night</p> 
     <p><%= listing.location%> </p> 
@@ -85,8 +85,8 @@
          </div> -->
       </div>
     </div>
- 
-<script src="/js/map.js"></script>
+<!--  
+<script src="/js/map.js"></script> -->
  
 
  
