@@ -112,8 +112,29 @@ body {
   padding: 0;
 }
 
-#map {
-  height:200px;       /* make it taller */
-  width: 100%;         /* full width of container */
-  border-radius: 10px; /* optional, looks nice */
+
+/* search clear button */
+
+.search-wrapper {
+  position: relative;
+}
+
+.search-input {
+  padding-right: 2.5rem; /* space for button */
+}
+
+.clear-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  cursor: pointer;
+  color: #999;
+}
+
+.clear-btn:hover {
+  color: #fe424d;
 }

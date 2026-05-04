@@ -87,6 +87,11 @@ app.use((req,res,next)=>{
     next();
 });
 
+app.use((req, res, next) => {
+  res.locals.search = req.query.search || "";
+  next();
+});
+
 app.get("/demouser", async(req,res)=>{
      let  fakeUser = new User({
         email:"student@gmail.com",
@@ -124,5 +129,3 @@ app.listen(PORT, () => {
 });
 
 
-
-console.log(Listing.collection.name);

@@ -35,49 +35,41 @@
 </style>
 
 <div id="filters">
-  <div class="filter">
+  <div class="filter" data-category="Rooms">
     <div><i class="fa-solid fa-bed"></i></div>
     <p>Rooms</p>
   </div>
-    <div class="filter">
+    <div class="filter" data-category="Trending">
     <div><i class="fa-solid fa-fire"></i></div>
     <p>Trending</p>
   </div>
-    <div class="filter">
+    <div class="filter" data-category="Arctic">
     <div><i class="fa-regular fa-snowflake"></i></div>
     <p>Arctic</p>
   </div>
-    <div class="filter">
+    <div class="filter" data-category="Mountain">
     <div><i class="fa-solid fa-mountain"></i></div>
-    <p>Mounain</p>
+    <p>Mountain</p>
   </div>
-    <div class="filter">
+    <div class="filter" data-category="Amazing Pools">
     <div><i class="fa-solid fa-person-swimming"></i></div>
     <p>Amazing Pools</p>
   </div>
-    <div class="filter">
+    <div class="filter" data-category="Castles">
     <div><i class="fa-brands fa-fort-awesome"></i></div>
     <p>Castles</p>
   </div>
-    <div class="filter">
+    <div class="filter" data-category="Camping">
     <div><i class="fa-solid fa-campground"></i></div>
     <p>Camping</p>
   </div>
-    <div class="filter">
+    <div class="filter" data-category="Iconic Cities">
     <div><i class="fa-solid fa-mountain-city"></i></div>
     <p>Iconic Cities</p>
   </div>
-    <div class="filter">
+    <div class="filter" data-category="Farm">
     <div><i class="fa-solid fa-building-wheat"></i></div>
     <p>Farm</p>
-  </div>
-   <div class="filter">
-    <div><i class="fa-solid fa-landmark-dome"></i></div>
-    <p>Domes</p>
-  </div>
-   <div class="filter">
-    <div><i class="fa-solid fa-sailboat"></i></div>
-    <p>Boats</p>
   </div>
   <div class="taxtoggle">
   <div class="form-check-reverse form-switch">
@@ -87,11 +79,13 @@
   </div>
 </div>
 
-
+  <% if(alllistings.length === 0) { %>
+  <h4>No listings found 😔</h4>
+  <% } %>
 <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
     <% for(let listing of alllistings){ %>
     <a href="/listings/<%=listing._id %>" class="listing-link mt-3">
-        <div class="card col listing-card">
+        <div class="card col listing-card "data-category="<%= listing.category %>">
             <img src="<%= listing.image.url %>"
             class="card-img-top"
             alt="listing-image"
@@ -124,6 +118,33 @@
       info.style.display = 'none';
       }
     }
-  })
+  });
+  const filters = document.querySelectorAll(".filter");
+  const listings = document.querySelectorAll(".listing-card");
+
+  filters.forEach(filter => {
+    filter.addEventListener("click", () => {
+      const selected = filter.getAttribute("data-category");
+
+      listings.forEach(listing => {
+        const category = listing.getAttribute("data-category");
+
+        if (category === selected) {
+          listing.style.display = "";
+        } else {
+          listing.style.display = "none";
+        }
+      });
+    });
+  });
+
+  const input = document.getElementById("searchInput");
+  const clearBtn = document.getElementById("clearBtn");
+
+  clearBtn.addEventListener("click", () => {
+    input.value = "";
+    window.location.href = "/listings"; // reset page
+  });
+
 </script>
 

@@ -3,9 +3,24 @@ const maptilerClient = require("@maptiler/client"); //for geocoding
 const mapToken = process.env.MAP_TOKEN;
 maptilerClient.config.apiKey = mapToken;
 
-module.exports.index = async(req,res)=>{
- const alllistings = await Listing.find({})
-    res.render("listings/index.ejs",{alllistings});
+module.exports.index = async (req, res) => {
+  let { search } = req.query;
+
+  let query = {};
+
+  if (search && search.trim() !== "") {
+    query = {
+      $or: [
+        { location: { $regex: search, $options: "i" } },
+        { country: { $regex: search, $options: "i" } },
+        { title: { $regex: search, $options: "i" } }
+      ]
+    };
+  }
+
+  const alllistings = await Listing.find(query);
+
+  res.render("listings/index.ejs", { alllistings, search });
 };
 
 module.exports.renderNewForm = (req,res,)=>{
